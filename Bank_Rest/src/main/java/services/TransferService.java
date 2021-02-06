@@ -32,7 +32,7 @@ public class TransferService {
 		return transferDao.findAll();
 	}
 
-	public Transfer updateTransferById(Transfer transfer) {
+	public Transfer updateTransfer(Transfer transfer) {
 		Transfer existingTransfer = transferDao.findById(transfer.getId()).orElse(null);
 		existingTransfer.setMoneyTransfer(transfer.getMoneyTransfer());
 		return transferDao.save(existingTransfer);

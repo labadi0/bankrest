@@ -2,6 +2,7 @@ package services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.BankDao;
@@ -9,7 +10,7 @@ import entity.*;
 
 @Service
 public class BankService {
-	
+	@Autowired
 	private BankDao bankDao;
 	
 	public Bank saveBank(Bank bank) {

@@ -17,4 +17,8 @@ public class Consultation extends Operation {
 	@Column(nullable = false,length = 40)
 	private int numberConsultation;
 
+
+	
+
+
 }

@@ -16,24 +16,27 @@ import lombok.ToString;
 
 @Entity
 @Data
-@AllArgsConstructor
+
 @NoArgsConstructor
 @ToString
 public class Client {
 	@Id 
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private int id;
+	
 	@Column(nullable = false,length = 40)
-
-	private String Name;
+	private String name;
+	
 	@Column(nullable = false,length = 40)
-
 	private String rib;
+	
 	@Column(nullable = false,length = 40)
-
 	private double amount;
+	
 	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Operation.class)
 	private Operation operation;
+
+
 
 	
 }

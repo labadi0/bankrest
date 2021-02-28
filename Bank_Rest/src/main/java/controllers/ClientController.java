@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.tomcat.util.json.JSONParser;
-import org.json.JSONObject;
+//import org.json.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,10 +35,7 @@ import services.TransferService;
 public class ClientController {
 	@Autowired
 	private ClientService clientService;
-	@Autowired
-	private ConsultationService ConsultationService;
-	@Autowired
-	private TransferService transferService;
+
 
 	@RequestMapping(method = RequestMethod.GET, value = "clients/{id}")
 	public Client getClientById(@PathVariable int id) {

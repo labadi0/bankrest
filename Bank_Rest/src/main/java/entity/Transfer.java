@@ -19,8 +19,14 @@ import lombok.ToString;
 @ToString
 public class Transfer extends Operation {
 	@Column(nullable = false, length = 40)
-	@JsonProperty("moneyTransfer")
+	//@JsonProperty("moneyTransfer")
 	private double moneyTransfer;
+
+	public Transfer(int id,double moneyTransfer) {
+		super(id);
+		this.moneyTransfer = moneyTransfer;
+
+	}
 
 	
 	

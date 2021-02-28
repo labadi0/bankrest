@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import dao.ClientDao;
 import entity.Client;
+import lombok.Data;
 
 @Service
+@Data
 public class ClientService {
 	@Autowired
 	private ClientDao clientDao;

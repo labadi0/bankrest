@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import dao.ConsultationDao;
 import entity.Consultation;
+import lombok.Data;
 
 @Service
+@Data
 public class ConsultationService {
 	@Autowired
 	private ConsultationDao consultationDao;

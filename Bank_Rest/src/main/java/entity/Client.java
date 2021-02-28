@@ -18,6 +18,7 @@ import lombok.ToString;
 @Data
 
 @NoArgsConstructor
+
 @ToString
 public class Client {
 	@Id 
@@ -35,6 +36,15 @@ public class Client {
 	
 	@OneToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Operation.class)
 	private Operation operation;
+
+	public Client(int id, String name, String rib, double amount, Operation operation) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.rib = rib;
+		this.amount = amount;
+		this.operation = operation;
+	}
 
 
 

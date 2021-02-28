@@ -2,6 +2,9 @@ package servicesTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -68,6 +71,19 @@ public class ClientServiceTest {
 
         Mockito.verify(clientDao, Mockito.times(1)).deleteById(client.getId());
 
+	}
+
+	
+	
+	@Test
+	@DisplayName("ici je teste si la methode getClient marche ou pas ")
+	public void getClientTest() {
+		ClientService clientService = new ClientService();
+		clientService.setClientDao(clientDao);		
+		Optional<Client> client = Optional.of(new Client(1, "client1", "12AEZR1A", 200, new Transfer(1, 200)));
+		when(clientDao.findById(1)).thenReturn(client);
+		Client tf = clientService.getClientById(1);
+		assertEquals(200, tf.getAmount());
 	}
 
 	

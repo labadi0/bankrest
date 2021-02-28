@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
+
 @NoArgsConstructor
 public class Bank {
 	@Id 
@@ -29,4 +29,13 @@ public class Bank {
 	private List<Client> clients = new ArrayList<Client>();
 	@Column(nullable = false,length = 40)
 	private String bankName;
+	public Bank(int idBank, List<Client> clients, String bankName) {
+		super();
+		this.idBank = idBank;
+		this.clients = clients;
+		this.bankName = bankName;
+	}
+	
+	
+	
 }

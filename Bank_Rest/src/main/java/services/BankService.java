@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dao.BankDao;
 import entity.*;
+import lombok.Data;
 
 @Service
 public class BankService {
@@ -39,6 +40,12 @@ public class BankService {
 		bankDao.deleteById(id);
 		return "bank removed !! " + id;
 	}
+
+	public void setBankDao(BankDao bankDao) {
+		this.bankDao = bankDao;
+	}
+
+
 	
 
 }

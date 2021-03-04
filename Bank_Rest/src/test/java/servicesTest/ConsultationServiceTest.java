@@ -1,9 +1,12 @@
 package servicesTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -41,13 +44,6 @@ public class ConsultationServiceTest {
 		ConsultationService consultationService = new ConsultationService();
 		consultationService.setConsultationDao(consultationDao);
 		Consultation consultation = new Consultation(1, 100);
-		/*
-		postService.saveTransfer(postRequest);
-		Mockito.verify(userRepository, Mockito.times(1)).save(postArgumentCaptor.capture());
-
-		Assertions.assertThat(postArgumentCaptor.getValue().getId()).isEqualTo(1);
-		Assertions.assertThat(postArgumentCaptor.getValue().getMoneyTransfer()).isEqualTo(200);
-		*/
 		Mockito.when(consultationDao.save(consultation)).thenReturn(consultation);
         Consultation found = consultationService.saveConsultation(consultation);
 
@@ -57,57 +53,27 @@ public class ConsultationServiceTest {
 
 	}
 	
-	
-	
-
-	
-	
-	/*
-	@Test
-	@DisplayName("je test si la method updateTransfer foncionne ")
-	public void UpdateTransferTest() throws Exception{
-		
-		TransferService postService = new TransferService();
-		postService.setTransferDao(userRepository);
-		Optional<Transfer> postRequest = Optional.of(new Transfer(1, 200));
-		
-		Transfer postRequest2 = new Transfer(1,100);
-		
-		
-		Mockito.when(userRepository.save(postRequest.get())).thenReturn(postRequest.get());
-		Mockito.when(userRepository.findById(1)).thenReturn(postRequest);
-
-		Mockito.when(userRepository.save(postRequest2)).thenReturn(postRequest2);
-
-        Transfer found = postService.saveTransfer(postRequest.get());
-            
-        Transfer found2 = postService.saveTransfer(postRequest2);
-
-
-        assertNotNull(found2);
-        assertEquals(found.getId(), found2.getId());
-        
-       // assertEquals(100, found.getMoneyTransfer());
-
-	}
-	*/
 
 	@Test
 	@DisplayName("ici je teste si la methode deleteConsultation marche ou pas ")
 	public void deleteConsultationTest() {
 		ConsultationService consultationService = new ConsultationService();
 		consultationService.setConsultationDao(consultationDao);
-		Consultation consultation = new Consultation(1, 200);
+		Optional<Consultation> consultation = Optional.of(new Consultation(1, 200));
 		// when(userRepository.deleteById(1)).thenReturn(transferEntity);
-
-		consultationService.deleteConsultation(consultation.getId());
-
-        Mockito.verify(consultationDao, Mockito.times(1)).deleteById(consultation.getId());
+		/*
+		 * transferSerivce.deleteTransfer(transfer.getId()); Mockito.verify(transferDao,
+		 * Mockito.times(1)).deleteById(transfer.getId());
+		 */
+		// Mockito.when(transferDao.findById(1)).thenReturn(transfer);
+		Mockito.when(consultationDao.findById(1)).thenReturn(consultation);
+		Mockito.when(consultationDao.existsById(consultation.get().getId())).thenReturn(false);
+		assertFalse(consultationDao.existsById(consultation.get().getId()));
 
 	}
 
 	@Test
-	@DisplayName("ici je teste si la methode getTransfer marche ou pas ")
+	@DisplayName("ici je teste si la methode getConsultation marche ou pas ")
 	public void getConsultationTest() {
 		ConsultationService consultationService = new ConsultationService();
 		consultationService.setConsultationDao(consultationDao);
@@ -120,7 +86,49 @@ public class ConsultationServiceTest {
 		assertEquals(200, tf.getNumberConsultation());
 	}
 
+	@Test
+	@DisplayName("ici je teste si la methode updateConsultation marche ou pas ")
+	public void updateConsultationTest() {
+		ConsultationService consultationService = new ConsultationService();
+		consultationService.setConsultationDao(consultationDao);
+		Optional<Consultation> consultation = Optional.of(new Consultation(1, 200));
+		Mockito.when(consultationDao.findById(1)).thenReturn(consultation);
+		consultation.get().setNumberConsultation(100);
+		Mockito.when(consultationDao.save(consultation.get())).thenReturn(consultation.get());
+		assertThat(consultationService.updateConsultationById(consultation.get())).isEqualTo(consultation.get());
+		assertThat(consultation.get().getId()).isEqualTo(1);
+
+		// System.out.println(transfer.get().getMoneyTransfer());
+	}
+
+	@Test
+	@DisplayName("ici je teste si la methode getAllConsultation marche ou pas ")
+	public void getAllConsultationTest() {
+		ConsultationService consultationService = new ConsultationService();
+		consultationService.setConsultationDao(consultationDao);
+		Consultation consultation = new Consultation(1, 200);
+		Consultation consultation2 = new Consultation(2, 400);
+		ArrayList<Consultation> listConsultations = new ArrayList<>();
+		listConsultations.add(consultation);
+		listConsultations.add(consultation2);
+		Mockito.when(consultationDao.findAll()).thenReturn(listConsultations);
+		assertThat(consultationService.getAllConsultation().size()).isEqualTo(listConsultations.size());
+	}
 	
+	
+	@Test
+	@DisplayName("ici je teste si la methode saveAllConsultation marche ou pas ")
+	public void saveAllConsultationTest() {
+		ConsultationService consultationService = new ConsultationService();
+		consultationService.setConsultationDao(consultationDao);
+		Consultation consultation = new Consultation(1, 200);
+		Consultation consultation2 = new Consultation(2, 400);
+		ArrayList<Consultation> listConsultations = new ArrayList<>();
+		listConsultations.add(consultation);
+		listConsultations.add(consultation2);		
+		Mockito.when(consultationDao.saveAll(listConsultations)).thenReturn(listConsultations);
+		assertThat(consultationService.saveAllConsultation(listConsultations).size()).isEqualTo(listConsultations.size());
+	}
 	
 	
 	

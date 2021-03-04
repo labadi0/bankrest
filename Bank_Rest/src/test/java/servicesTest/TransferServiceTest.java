@@ -140,7 +140,7 @@ public class TransferServiceTest {
 		listTransfers.add(transfer);
 		listTransfers.add(transfer2);
 		Mockito.when(transferDao.findAll()).thenReturn(listTransfers);
-		assertThat(transferSerivce.getAllTransfers()).isEqualTo(listTransfers);
+		assertThat(transferSerivce.getAllTransfers().size()).isEqualTo(listTransfers.size());
 	}
 	
 	

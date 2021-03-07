@@ -34,8 +34,8 @@ public class TransferController {
 	}
 	*/
 	@PostMapping(value = "/transfers")
-	public void saveTransfer(@RequestBody	 Transfer transfer) {
-		transferService.saveTransfer(transfer);
+	public Transfer saveTransfer(@RequestBody	 Transfer transfer) {
+		return transferService.saveTransfer(transfer);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/transfersAll")
